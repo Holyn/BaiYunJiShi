@@ -16,6 +16,7 @@ package com.baiyun.http;
  * 0010	图片上传失败
  * 0011	没有查询到结果
  * 0012	查询到结果
+ * 0013 mobileChannelId或mobileUserId不正确
  *
  */
 public class HttpRecode {
@@ -30,4 +31,6 @@ public class HttpRecode {
 	public static final String ERROR_NAME_EXIST = "0009";
 	
 	public static final String SEARCH_SUCCESS = "0012";
+	
+	public static final String ERROR_PUSH_ID = "0013";
 }
