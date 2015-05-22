@@ -148,30 +148,54 @@ public class SlideMenuHttpUtils extends HttpUtils {
 					JsonParser parser = new JsonParser();
 					JsonObject jsonObject = parser.parse(responseInfo.result).getAsJsonObject();
 
-					JsonElement recode1Ele = jsonObject.get("recode1");
-					if (recode1Ele.isJsonPrimitive()) {
-						String recode1 = recode1Ele.getAsString();
-						if (recode1.equalsIgnoreCase(HttpRecode.LOGIN_SUCCESS)) {
-							Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
-							JsonElement dataEle = jsonObject.get("data");
-							if (dataEle.isJsonObject()) {
-								userInfoPar = new Gson().fromJson(dataEle, UserInfoPar.class);
-
-								// 存储到sharepreference
-								UserInfoSP userInfoSP = UserInfoSP.getSingleInstance(context);
-								userInfoSP.setUserInfoPar(userInfoPar);
-								userInfoSP.setUserName(userName);
-								userInfoSP.setPassword(password);
-
+					
+					JsonElement recodeEle = jsonObject.get("recode");
+					if (recodeEle != null) {
+						if (recodeEle.isJsonPrimitive()) {
+							String recode = recodeEle.getAsString();
+							if (recode.equalsIgnoreCase(HttpRecode.ERROR_NAME_EXIST)) {
+								Toast.makeText(context, "用户名不存在", Toast.LENGTH_LONG).show();
+							} else if (recode.equalsIgnoreCase(HttpRecode.ERROR_NAME_PASSWORD)) {
+								Toast.makeText(context, "用户名不存在或密码错误", Toast.LENGTH_LONG).show();
+							} else if (recode.equalsIgnoreCase(HttpRecode.ERROR_RANDOM_STRING)) {
+								Toast.makeText(context, "验证码出错", Toast.LENGTH_LONG).show();
+							} else if (recode.equalsIgnoreCase(HttpRecode.ERROR_PUSH_ID)) {
+								Toast.makeText(context, "mobileChannelId或mobileUserId不正确", Toast.LENGTH_LONG).show();
 							}
-						} else if (recode1.equalsIgnoreCase(HttpRecode.ERROR_NAME_EXIST)) {
-							Toast.makeText(context, "用户名不存在", Toast.LENGTH_LONG).show();
-						} else if (recode1.equalsIgnoreCase(HttpRecode.ERROR_NAME_PASSWORD)) {
-							Toast.makeText(context, "用户名不存在或密码错误", Toast.LENGTH_LONG).show();
-						} else if (recode1.equalsIgnoreCase(HttpRecode.ERROR_RANDOM_STRING)) {
-							Toast.makeText(context, "验证码出错", Toast.LENGTH_LONG).show();
 						}
 					}
+
+					JsonElement recode1Ele = jsonObject.get("recode1");
+					if (recode1Ele != null) {
+						if (recode1Ele.isJsonPrimitive()) {
+							String recode1 = recode1Ele.getAsString();
+							if (recode1.equalsIgnoreCase(HttpRecode.LOGIN_SUCCESS)) {
+								Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
+								JsonElement dataEle = jsonObject.get("data");
+								if (dataEle.isJsonObject()) {
+									userInfoPar = new Gson().fromJson(dataEle, UserInfoPar.class);
+
+									// 存储到sharepreference
+									UserInfoSP userInfoSP = UserInfoSP.getSingleInstance(context);
+									userInfoSP.setUserInfoPar(userInfoPar);
+									userInfoSP.setUserName(userName);
+									userInfoSP.setPassword(password);
+
+								}
+							}
+						}
+					}
+					
+					JsonElement recode2Ele = jsonObject.get("recode2");
+					if (recode2Ele != null) {
+						if (recode2Ele.isJsonPrimitive()) {
+							String recode2 = recode2Ele.getAsString();
+							if (recode2.equalsIgnoreCase(HttpRecode.INSERT_SUCCESS)) {
+								System.out.println("====> 导入推送关联的用户成功 ");
+							} 
+						}
+					}
+					
 				} catch (Exception e) {
 					userInfoPar = null;
 					System.out.println(e);
@@ -182,7 +206,9 @@ public class SlideMenuHttpUtils extends HttpUtils {
 			@Override
 			public void onFailure(HttpException error, String msg) {
 				onPostLoginListener.onPostLogin(null);
-				Toast.makeText(context, "数据发送失败", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "登录异常", Toast.LENGTH_SHORT).show();
+				System.out.println("====> error = "+error);
+				System.out.println("====> msg = "+msg);
 			}
 
 		});
