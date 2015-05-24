@@ -91,7 +91,7 @@
             android:background="@null"
             android:contentDescription="@string/app_name"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_veri_code_nor" />
+            android:src="@color/light_gray" />
     </RelativeLayout>
 
     <Button

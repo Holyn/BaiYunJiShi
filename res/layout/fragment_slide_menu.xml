@@ -17,7 +17,7 @@
         android:orientation="horizontal" >
 
         <com.baiyun.custom.CircleImageView
-            android:id="@+id/circleIV_more_personal"
+            android:id="@+id/cv_header"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/iv_header_default"
@@ -25,10 +25,11 @@
             app:border_width="1dp" />
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="14dp"
-            android:text="我我我"
+            android:text="登录"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_18" />
     </LinearLayout>
