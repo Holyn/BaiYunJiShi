@@ -22,6 +22,8 @@ public class MyApplication extends Application {
 	private String cookie = null;
 	
 	private int curRecruitFragmentPosition = -1;//记住当前打开的ContainerFragment里面对应的Fragment位置
+	
+	private boolean isLogin = false;//是否已经登录
 
 	@Override
 	public void onCreate() {
@@ -35,6 +37,14 @@ public class MyApplication extends Application {
 	}
 	public void setCurRecruitFragmentPosition(int position) {
 		this.curRecruitFragmentPosition = position;
+	}
+	
+	public boolean isLogin() {
+		return isLogin;
+	}
+
+	public void setLogin(boolean isLogin) {
+		this.isLogin = isLogin;
 	}
 
 	public static void initImageLoader(Context context) {
