@@ -3,6 +3,7 @@ package com.baiyun.httputils;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.baiyun.activity.MyApplication;
 import com.baiyun.http.HttpRecode;
 import com.baiyun.http.HttpURL;
 import com.baiyun.sharepreferences.UserInfoSP;
@@ -46,8 +47,8 @@ public class SlideMenuHttpUtils extends HttpUtils {
 		public void onUploadUserImg(boolean isSuccess);
 	}
 	
-	public interface OnPostAdvice{//意见反馈
-		
+	public interface OnPostAdviceListener{//意见反馈
+		public void onPostAdvice(boolean isSuccess);
 	}
 
 	public void getVersion(String version, final OnGetVersionListener onGetVersionListener) {
@@ -180,6 +181,9 @@ public class SlideMenuHttpUtils extends HttpUtils {
 									userInfoSP.setUserInfoPar(userInfoPar);
 									userInfoSP.setUserName(userName);
 									userInfoSP.setPassword(password);
+									
+									// 标志用户已经登录
+									((MyApplication)context.getApplicationContext()).setLogin(true);
 
 								}
 							}
@@ -258,6 +262,48 @@ public class SlideMenuHttpUtils extends HttpUtils {
 				// TODO Auto-generated method stub
 				super.onLoading(total, current, isUploading);
 				System.out.println("====> totlal:"+total+"/ current:"+current);
+			}
+
+		});
+	}
+	
+	public void postAdvice(String description, String creater, final OnPostAdviceListener onPostAdviceListener){
+		final RequestParams params = new RequestParams();
+		params.addBodyParameter(HttpURL.PARAM_DESCRIPTION, description);
+		params.addBodyParameter(HttpURL.PARAM_CREATER, creater);
+
+		send(HttpMethod.POST, HttpURL.R_ADVICE, params, new RequestCallBack<String>() {
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				// TODO Auto-generated method stub
+				boolean isSuccess = false;
+				try {
+					JsonParser parser = new JsonParser();
+					JsonObject jsonObject = parser.parse(responseInfo.result).getAsJsonObject();
+
+					JsonElement recodeEle = jsonObject.get("recode");
+					if (recodeEle.isJsonPrimitive()) {
+						String recode = recodeEle.getAsString();
+						if (recode.equalsIgnoreCase(HttpRecode.INSERT_SUCCESS)) {
+							Toast.makeText(context, "谢谢您的反馈", Toast.LENGTH_SHORT).show();
+							isSuccess = true;
+						}
+					}
+				} catch (Exception e) {
+					isSuccess = false;
+					System.out.println(e);
+				}
+				if (onPostAdviceListener != null) {
+					onPostAdviceListener.onPostAdvice(isSuccess);
+				}
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				if (onPostAdviceListener != null) {
+					onPostAdviceListener.onPostAdvice(false);
+				}
 			}
 
 		});
