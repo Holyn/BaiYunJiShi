@@ -1,5 +1,6 @@
 package com.baiyun.activity.main;
 
+import com.baiyun.activity.MyApplication;
 import com.baiyun.activity.R;
 import com.baiyun.baidu_push.BaiduPushManager;
 import com.baiyun.base.BaseSlidingFragmentActivity;
@@ -9,6 +10,7 @@ import com.baiyun.fragment.sliding.HelpFragment;
 import com.baiyun.fragment.sliding.LoginFragment;
 import com.baiyun.fragment.sliding.SettingFragment;
 import com.baiyun.fragment.sliding.ToolsFragment;
+import com.baiyun.fragment.sliding.UserInfoFragment;
 import com.baiyun.httputils.SlideMenuHttpUtils;
 import com.baiyun.vo.parcelable.VersionPar;
 
@@ -27,6 +29,7 @@ public class MainActivity extends BaseSlidingFragmentActivity {
 	private Fragment curFragment;
 	
 	private int curPosition = -1;
+	private UserInfoFragment userInfoFragment = null;
 	private LoginFragment loginFragment = null;
 	private ToolsFragment toolsFragment = null;
 	private SettingFragment settingFragment = null;
@@ -62,6 +65,16 @@ public class MainActivity extends BaseSlidingFragmentActivity {
 			}
 		});
     }
+	
+	public void showLoginFragment() {
+		setBackPressEnabled(true);
+		if (isBtnMenu2Enable()) {
+			setBtnMenu2Enable(false);
+			isSetBtnMenu2EnableFalse = true;
+		}
+		setTopBarTitle("用户登录");
+		switchFragment(1);
+	}
     
     private void initgetSlideMenuFramentListener(){
         getSlideMenuFragment().setOnSlideMenuFragmentEventListener(new SlideMenuFragment.OnSlideMenuFragmentEventListener() {
@@ -74,29 +87,39 @@ public class MainActivity extends BaseSlidingFragmentActivity {
 					isSetBtnMenu2EnableFalse = true;
 				}
 				switch (menuType) {
+				case SlideMenuFragment.MENU_INFO:
+					if (((MyApplication)getApplication()).isLogin()) {
+						setTopBarTitle("用户信息");
+						switchFragment(1);
+					}else {
+						setTopBarTitle("用户登录");
+						switchFragment(2);
+					}
+					closeSlideMenuFragmetAndShowContent();
+					break;
 				case SlideMenuFragment.MENU_LOGIN:
 					setTopBarTitle("用户登录");
-					switchFragment(1);
+					switchFragment(2);
 					closeSlideMenuFragmetAndShowContent();
 					break;
 				case SlideMenuFragment.MENU_TOOLS:
 					setTopBarTitle("实用工具");
-					switchFragment(2);
+					switchFragment(3);
 					closeSlideMenuFragmetAndShowContent();
 					break;
 				case SlideMenuFragment.MENU_SETTING:
 					setTopBarTitle("设置");
-					switchFragment(3);
+					switchFragment(4);
 					closeSlideMenuFragmetAndShowContent();
 					break;
 				case SlideMenuFragment.MENU_HELP:
 					setTopBarTitle("使用帮助");
-					switchFragment(4);
+					switchFragment(5);
 					closeSlideMenuFragmetAndShowContent();
 					break;
 				case SlideMenuFragment.MENU_ABOUT:
 					setTopBarTitle("关于我们");
-					switchFragment(5);
+					switchFragment(6);
 					closeSlideMenuFragmetAndShowContent();
 					break;
 				case SlideMenuFragment.MENU_EXIT:
@@ -129,26 +152,31 @@ public class MainActivity extends BaseSlidingFragmentActivity {
 			}
 			nextFragment = containerFragment;
 		}else if (position == 1) {
+			if (userInfoFragment == null) {
+				userInfoFragment = UserInfoFragment.newInstance();
+			}
+			nextFragment = userInfoFragment;
+		}else if (position == 2) {
 			if (loginFragment == null) {
 				loginFragment = LoginFragment.newInstance();
 			}
 			nextFragment = loginFragment;
-		}else if (position == 2) {
+		}else if (position == 3) {
 			if (toolsFragment == null) {
 				toolsFragment = ToolsFragment.newInstance();
 			}
 			nextFragment = toolsFragment;
-		}else if (position == 3) {
+		}else if (position == 4) {
 			if (settingFragment == null) {
 				settingFragment = SettingFragment.newInstance();
 			}
 			nextFragment = settingFragment;
-		}else if (position == 4) {
+		}else if (position == 5) {
 			if (helpFragment == null) {
 				helpFragment = HelpFragment.newInstance();
 			}
 			nextFragment = helpFragment;
-		}else if (position == 5) {
+		}else if (position == 6) {
 			if (aboutFragment == null) {
 				aboutFragment = AboutFragment.newInstance();
 			}
