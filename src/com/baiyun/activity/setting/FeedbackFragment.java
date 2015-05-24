@@ -62,7 +62,7 @@ public class FeedbackFragment extends BaseFragment{
 			return;
 		}
 		
-//		new SlideMenuHttpUtils(context)
+		new SlideMenuHttpUtils(getActivity()).postAdvice(content, email, null);
 	}
 
 }
