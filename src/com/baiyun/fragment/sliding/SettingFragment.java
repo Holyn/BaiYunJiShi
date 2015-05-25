@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baiyun.activity.MyApplication;
 import com.baiyun.activity.R;
 import com.baiyun.activity.setting.SettingItemActivity;
 import com.baiyun.baidu_push.BaiduPushManager;
@@ -88,9 +89,14 @@ public class SettingFragment extends BaseFragment{
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), SettingItemActivity.class);
-				intent.putExtra(SettingItemActivity.EXTRA_ITEM_TYPE, SettingItemActivity.CHANGE_PWD);
-				startActivity(intent);
+				if (((MyApplication)getActivity().getApplication()).isLogin()) {
+					Intent intent = new Intent(getActivity(), SettingItemActivity.class);
+					intent.putExtra(SettingItemActivity.EXTRA_ITEM_TYPE, SettingItemActivity.CHANGE_PWD);
+					startActivity(intent);
+				}else {
+					Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
+				}
+				
 			}
 		});
 		

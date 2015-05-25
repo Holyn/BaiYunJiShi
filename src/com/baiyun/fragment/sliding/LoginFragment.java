@@ -10,6 +10,7 @@ import org.apache.http.client.CookieStore;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
@@ -21,8 +22,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.baiyun.activity.R;
+import com.baiyun.activity.main.MainActivity;
 import com.baiyun.base.BaseFragment;
 import com.baiyun.cache.CachePath;
+import com.baiyun.constants.Constants;
 import com.baiyun.http.HttpURL;
 import com.baiyun.http.MyCookieStore;
 import com.baiyun.httputils.SlideMenuHttpUtils;
@@ -195,6 +198,8 @@ public class LoginFragment extends BaseFragment {
 			return;
 		}
 
+		showLoadingDialog();
+		
 		UserInfoSP userInfoSP = UserInfoSP.getSingleInstance(getActivity());
 		String mobileUserId = userInfoSP.getMobileUserId();
 		String mobileChannelId = userInfoSP.getMobileChannelId();
@@ -206,8 +211,18 @@ public class LoginFragment extends BaseFragment {
 
 					@Override
 					public void onPostLogin(UserInfoPar userInfoPar) {
+						closeLoadingDialog();
 						// TODO Auto-generated method stub
-
+						if (userInfoPar != null) {
+							etName.setText("");
+							etPassword.setText("");
+							etVeriCode.setText("");
+							
+							Intent intent = new Intent(Constants.INTENT_ACTION_LOGIN_SUCCESS);
+							intent.putExtra(Constants.KEY_USER_INFO_PAR, userInfoPar);
+							getActivity().sendBroadcast(intent);
+						}
+						((MainActivity)getActivity()).onBackPressed();
 					}
 				});
 
