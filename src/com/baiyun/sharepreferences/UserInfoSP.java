@@ -46,6 +46,18 @@ public class UserInfoSP {
 		setClassName(userInfoPar.getClassName());
 		setImg(userInfoPar.getImg());
 	}
+	
+	public UserInfoPar getUserInfoPar() {
+		UserInfoPar userInfoPar = new UserInfoPar();
+		userInfoPar.setId(getId());
+		userInfoPar.setAccount(getAccount());
+		userInfoPar.setRealName(getRealName());
+		userInfoPar.setGender(getGender());
+		userInfoPar.setMobile(getMobile());
+		userInfoPar.setClassName(getClassName());
+		userInfoPar.setImg(getImg());
+		return userInfoPar;
+	}
 
 	//id
 	public void setId(String id) {
