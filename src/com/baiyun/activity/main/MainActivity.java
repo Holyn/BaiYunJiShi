@@ -21,6 +21,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends BaseSlidingFragmentActivity {
 	private FragmentManager fragmentManager;
@@ -81,11 +82,6 @@ public class MainActivity extends BaseSlidingFragmentActivity {
 			
 			@Override
 			public void onSlideMenuFragmentEvent(int menuType) {
-				setBackPressEnabled(true);
-				if (isBtnMenu2Enable()) {
-					setBtnMenu2Enable(false);
-					isSetBtnMenu2EnableFalse = true;
-				}
 				switch (menuType) {
 				case SlideMenuFragment.MENU_INFO:
 					if (((MyApplication)getApplication()).isLogin()) {
@@ -98,9 +94,13 @@ public class MainActivity extends BaseSlidingFragmentActivity {
 					closeSlideMenuFragmetAndShowContent();
 					break;
 				case SlideMenuFragment.MENU_LOGIN:
-					setTopBarTitle("用户登录");
-					switchFragment(2);
-					closeSlideMenuFragmetAndShowContent();
+					if (((MyApplication)getApplication()).isLogin()) {
+						Toast.makeText(getApplicationContext(), "你已登录", Toast.LENGTH_SHORT).show();
+					}else {
+						setTopBarTitle("用户登录");
+						switchFragment(2);
+						closeSlideMenuFragmetAndShowContent();
+					}
 					break;
 				case SlideMenuFragment.MENU_TOOLS:
 					setTopBarTitle("实用工具");
@@ -145,6 +145,15 @@ public class MainActivity extends BaseSlidingFragmentActivity {
     
 	public void switchFragment(int position) {
 		System.out.println("cur="+curPosition+" pos="+position);
+		
+		if (position != 0) {//如果非首页，则显示回退按钮
+			setBackPressEnabled(true);
+			if (isBtnMenu2Enable()) {
+				setBtnMenu2Enable(false);
+				isSetBtnMenu2EnableFalse = true;
+			}
+		}
+		
 		Fragment nextFragment = null;
 		if (position == 0) {
 			if (containerFragment == null) {

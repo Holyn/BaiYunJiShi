@@ -1,11 +1,17 @@
 package com.baiyun.activity.main;
 
 import com.baiyun.activity.R;
+import com.baiyun.constants.Constants;
 import com.baiyun.custom.CircleImageView;
 import com.baiyun.http.HttpURL;
 import com.baiyun.sharepreferences.UserInfoSP;
+import com.baiyun.vo.parcelable.UserInfoPar;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -45,6 +51,50 @@ public class SlideMenuFragment extends Fragment{
 	
 	public SlideMenuFragment() {
 		// TODO Auto-generated constructor stub
+	}
+
+	//注册广播，接收登录与退出的信息
+    private BroadcastReceiver logionReceiver = new BroadcastReceiver() {  
+        
+        @Override  
+        public void onReceive(Context context, Intent intent) {
+            if(intent.getAction().equals(Constants.INTENT_ACTION_LOGIN_SUCCESS)){
+            	UserInfoPar userInfoPar = intent.getParcelableExtra(Constants.KEY_USER_INFO_PAR);
+            	if (userInfoPar == null) {//退出
+            		cvHeader.setImageResource(R.drawable.iv_header_default);
+            		tvName.setText("登录");
+				}else {//登录
+	        		String headerPathLast = userInfoPar.getImg();
+	        		if (!TextUtils.isEmpty(headerPathLast)) {
+	        			String picUrl = HttpURL.HOST+headerPathLast.substring(1);
+	        			System.out.println("====> picUrl = "+picUrl);
+	        			ImageLoader.getInstance().displayImage(picUrl, cvHeader);
+	        		}
+	        		
+	        		String name = userInfoPar.getRealName();
+	        		if (!TextUtils.isEmpty(name)) {
+	        			tvName.setText(name);
+	        		}
+				}
+            }  
+        }  
+    }; 
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		//注册广播，接收登录与退出的信息
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Constants.INTENT_ACTION_LOGIN_SUCCESS);
+		getActivity().registerReceiver(logionReceiver, filter);
+	}
+
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		getActivity().unregisterReceiver(logionReceiver);
 	}
 
 	@Override
@@ -137,9 +187,17 @@ public class SlideMenuFragment extends Fragment{
 			}
 		});
 		
-		
 		return rootView;
 	}
 	
+	private class LoginSuccessReceiver extends BroadcastReceiver{
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
 	
 }
