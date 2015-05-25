@@ -44,7 +44,7 @@ public class SlideMenuHttpUtils extends HttpUtils {
 	}
 	
 	public interface OnUploadUserImgListener{//上传头像
-		public void onUploadUserImg(boolean isSuccess);
+		public void onUploadUserImg(String imgUrl);
 	}
 	
 	public interface OnPostAdviceListener{//意见反馈
@@ -218,17 +218,17 @@ public class SlideMenuHttpUtils extends HttpUtils {
 		});
 	}
 	
-	public void uploadUserImg(String id, String imgFilePath, final OnUploadUserImgListener onUploadUserImgListener) {
+	public void uploadUserImg(String id, String img64Str, final OnUploadUserImgListener onUploadUserImgListener) {
 		final RequestParams params = new RequestParams();
 		params.addBodyParameter(HttpURL.PARAM_ID, id);
-		params.addBodyParameter(HttpURL.PARAM_IMG, Base64Util.getImageStr(imgFilePath));
+		params.addBodyParameter(HttpURL.PARAM_IMG, img64Str);
 		
 		send(HttpMethod.POST, HttpURL.R_UPLOAD_USER_IMG, params, new RequestCallBack<String>() {
 
 			@Override
 			public void onSuccess(ResponseInfo<String> responseInfo) {
 				// TODO Auto-generated method stub
-				boolean isSuccess = false;
+				String imgUrl = null;
 				try {
 					JsonParser parser = new JsonParser();
 					JsonObject jsonObject = parser.parse(responseInfo.result).getAsJsonObject();
@@ -238,22 +238,29 @@ public class SlideMenuHttpUtils extends HttpUtils {
 						String recode = recodeEle.getAsString();
 						if (recode.equalsIgnoreCase(HttpRecode.INSERT_SUCCESS)) {
 							Toast.makeText(context, "图片上传成功", Toast.LENGTH_SHORT).show();
-							isSuccess = true;
+							JsonElement dataEle = jsonObject.get("data");
+							if (dataEle.isJsonObject()) {
+								JsonObject dataObject = dataEle.getAsJsonObject();
+								JsonElement imgEle = dataObject.get("img");
+								if (imgEle.isJsonPrimitive()) {
+									imgUrl = imgEle.getAsString();
+								}
+							}
 						}
 					}
 				} catch (Exception e) {
-					isSuccess = false;
+					imgUrl = null;
 					System.out.println(e);
 				}
 				if (onUploadUserImgListener != null) {
-					onUploadUserImgListener.onUploadUserImg(isSuccess);;
+					onUploadUserImgListener.onUploadUserImg(imgUrl);;
 				}
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
 				if (onUploadUserImgListener != null) {
-					onUploadUserImgListener.onUploadUserImg(false);;
+					onUploadUserImgListener.onUploadUserImg(null);
 				}
 			}
 
