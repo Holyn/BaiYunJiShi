@@ -3,56 +3,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:background="@drawable/edittext_bg_2"
-    android:orientation="vertical"
-    android:padding="8dp" >
-
-    <TextView
-        android:id="@+id/tv_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="我掉了我掉了iPhone5，我掉了iPhone5，我掉了iPhone5，我掉了iPhone5，我掉了iPhone5，我掉了iPhone5，我掉了iPhone5，我掉了iPhone5，我掉了iPhone5，我掉了iPhone5，我掉了iPhone5，我掉了iPhone5，我掉了iPhone5，我掉了iPhone5，我掉了iPhone5，我掉了iPhone5，我掉了iPhone5，"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_14" />
-
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:gravity="right"
-        android:text="2015-5-26 00:46"
-        android:textColor="@color/gray"
-        android:textSize="@dimen/text_size_12" />
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:gravity="right"
-        android:orientation="horizontal" >
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/edittext_bg_2"
+        android:orientation="vertical"
+        android:padding="8dp" >
 
-        <Button
-            android:id="@+id/btn_edit"
-            android:layout_width="80dp"
-            android:layout_height="32dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/selector_btn_edit"
-            android:text="编   辑"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_16" />
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_14" />
 
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="80dp"
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:gravity="right"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/text_size_12" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="32dp"
-            android:background="@drawable/selector_btn_cancel"
-            android:text="删   除 "
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_16" />
+            android:gravity="right"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_edit"
+                android:layout_width="80dp"
+                android:layout_height="32dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/selector_btn_edit"
+                android:text="编   辑"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16" />
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="80dp"
+                android:layout_height="32dp"
+                android:background="@drawable/selector_btn_cancel"
+                android:text="删   除 "
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
