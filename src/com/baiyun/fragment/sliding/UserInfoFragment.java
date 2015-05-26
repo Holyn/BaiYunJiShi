@@ -59,7 +59,7 @@ public class UserInfoFragment extends BaseFragment{
 		String headerPathLast = userInfoPar.getImg();
 		if (!TextUtils.isEmpty(headerPathLast)) {
 			String picUrl = HttpURL.HOST+headerPathLast.substring(1);
-			System.out.println("====> picUrl = "+picUrl);
+//			System.out.println("====> picUrl = "+picUrl);
 			ImageLoader.getInstance().displayImage(picUrl, ivHeader);
 		}
 		
