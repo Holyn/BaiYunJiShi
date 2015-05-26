@@ -10,8 +10,10 @@ import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.baiyun.activity.MyApplication;
 import com.baiyun.activity.R;
 import com.baiyun.activity.schoolservice.SLostFoundActivity;
+import com.baiyun.activity.schoolservice.SLostPublishActivity;
 import com.baiyun.activity.schoolservice.SNoticeActivity;
 import com.baiyun.activity.schoolservice.SPhoneActivity;
 import com.baiyun.base.BaseFragment;
@@ -120,7 +122,12 @@ public class SchoolServiceFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-
+				if (((MyApplication)getActivity().getApplication()).isLogin()) {
+					Intent intent = new Intent(getActivity(), SLostPublishActivity.class);
+					getActivity().startActivity(intent);
+				}else {
+					Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 
