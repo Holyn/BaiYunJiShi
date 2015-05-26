@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.Html;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -148,7 +149,8 @@ public class TraSearchFragment extends BaseFragment{
 			
 			Vo2Par vo2 = list.get(position);
 			holder.tvTitle.setText(vo2.getTitle());
-			holder.tvBrief.setText(vo2.getBrief());
+//			holder.tvBrief.setText(vo2.getBrief());
+			holder.tvBrief.setText(Html.fromHtml(vo2.getBrief()));
 			
 			return convertView;
 		}
