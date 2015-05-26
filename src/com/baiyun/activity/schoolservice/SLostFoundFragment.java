@@ -95,7 +95,8 @@ public class SLostFoundFragment extends BaseFragment{
 			CircleImageView cvHeader = helper.getView(R.id.civ_header);
 			String headerUrlLast = item.getUserImg();
 			if (headerUrlLast != null) {
-				ImageLoader.getInstance().displayImage(HttpURL.HOST+headerUrlLast.substring(1), cvHeader);
+				String picUrl = HttpURL.HOST+headerUrlLast.substring(1);
+				ImageLoader.getInstance().displayImage(picUrl, cvHeader);
 			}
 			helper.setText(R.id.tv_name, item.getUserAccount());
 			helper.setText(R.id.tv_time, item.getContentCreateTime());
@@ -140,10 +141,13 @@ public class SLostFoundFragment extends BaseFragment{
 	private ArrayList<String> getImagePathList(LostPar lostPar){
 		ArrayList<String> pathList = new ArrayList<String>();
 		String picUrl = lostPar.getPicUrl();
+//		System.out.println("====> picUrl分解前 = "+picUrl);
 		if (!TextUtils.isEmpty(picUrl)) {
 			String[] pathArray = picUrl.split(",");
 			for (int i = 0; i < pathArray.length; i++) {
-				pathList.add(HttpURL.HOST+pathArray[i].substring(1));
+				String picUrlOne = HttpURL.HOST+pathArray[i].substring(1);
+//				System.out.println("====> picUrlFull = "+picUrlOne);
+				pathList.add(picUrlOne);
 			}
 		}
 		return pathList;
