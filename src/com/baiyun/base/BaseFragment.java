@@ -63,6 +63,15 @@ public abstract class BaseFragment extends Fragment{
 		loadingDialog.show();
 	}
 	
+	protected void showLoadingDialog(String msg) {
+		if (loadingDialog == null) {
+			loadingDialog = new LoadingDialog(getActivity(), msg);
+		}else {
+			loadingDialog.setMessage(msg);
+		}
+		loadingDialog.show();
+	}
+	
 	protected void closeLoadingDialog() {
 		if (loadingDialog != null) {
 			if (loadingDialog.isShowing()) {
