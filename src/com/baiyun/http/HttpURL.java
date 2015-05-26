@@ -14,7 +14,9 @@ public class HttpURL {
 	public final static String ID_PARAM = "&id=";
 	
 	public final static String PARAM_ID = "id";
+	public final static String PARAM_USER_NAME = "userName";
 	public final static String PARAM_IMG = "img";
+	public final static String PARAM_BRIEF = "brief";
 	
 	/**
 	 * 首页-广告图片
@@ -250,6 +252,18 @@ public class HttpURL {
 	public final static String S_LOST_FOUND = URL_PRE + "getLostAndFound";
 	
 	/**
+	 * 校内服务--发布寻物启事内容
+	 * http://app.byxy.com:8080/app/setLostAndFound?brief=寻物启事内容&userName=用户名
+	 */
+	public final static String S_LOST_PUBLISH_CONTENT = URL_PRE + "setLostAndFound";
+	
+	/**
+	 * 校内服务--发布寻物启事照片（与内容id关联）
+	 * http://app.byxy.com:8080/app/uploadLostAndFoundPicture?id=(返回的内容id)&img=（通过base64编码后的图片编码）
+	 */
+	public final static String S_LOST_PUBLISH_PIC = URL_PRE + "uploadLostAndFoundPicture";
+	
+	/**
 	 * 校内服务--办公电话
 	 * http://app.byxy.com:8080/app/serviceType?type=38
 	 */
@@ -290,7 +304,6 @@ public class HttpURL {
 	 */
 	public final static String PARAM_PASSWORD = "password";
 	public final static String PARAM_RANDOM_STRING = "randomString";
-	public final static String PARAM_USER_NAME = "userName";
 	public final static String R_LOGIN = URL_PRE + "userLogin";//接口
 	
 	/**
