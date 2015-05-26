@@ -34,7 +34,6 @@ import com.baiyun.util.FilePathUtil;
 import com.baiyun.util.FormatUtil;
 import com.baiyun.vo.parcelable.UserInfoPar;
 import com.holyn.selectlocalpiclib.LocalImageVo;
-import com.holyn.selectlocalpiclib.util.LoclImageLoader;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
