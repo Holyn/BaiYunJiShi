@@ -27,7 +27,7 @@ import android.widget.Toast;
 public class PicturesViewPagerItemFragment extends Fragment{
 	public static final String EXTRA_PICTURE_PATH = "extra_picture_path";//预览图片开始的位置
 	private String picturePath;	
-//	private boolean isLocal = true;
+	private boolean isLocal = false;
 	
 	private ImageView ivPhoto;
 	private ProgressBar pbLoading;
@@ -48,7 +48,7 @@ public class PicturesViewPagerItemFragment extends Fragment{
 		super.onCreate(savedInstanceState);
 		Bundle args = getArguments();
 		picturePath = args.getString(EXTRA_PICTURE_PATH);
-//		isLocal = args.getBoolean(PicturesViewPagerActivity.EXTRA_IS_LOCAL);
+		isLocal = args.getBoolean(PicturesViewPagerActivity.EXTRA_IS_LOCAL);
 	}
 
 	@Override
@@ -74,7 +74,10 @@ public class PicturesViewPagerItemFragment extends Fragment{
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		System.out.println("====> picturePath = "+picturePath);
+		if (isLocal) {
+			picturePath = "file://"+picturePath;
+		}
+//		System.out.println("====> picturePath = "+picturePath);
 		
 		ImageLoader.getInstance().displayImage(picturePath, ivPhoto, new SimpleImageLoadingListener() {
 			@Override

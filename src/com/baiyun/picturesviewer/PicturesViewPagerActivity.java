@@ -22,9 +22,11 @@ import android.widget.RadioGroup;
 public class PicturesViewPagerActivity extends FragmentActivity {
 	public static final String EXTRA_IMAGE_LIST = "extra_image_list";
 	public static final String EXTRA_CUR_POSITION = "extra_cur_position";
+	public static final String EXTRA_IS_LOCAL = "extra_is_local";
 	
 	private List<String> imageList = new ArrayList<String>();
 	private int curPosition = 0;
+	private boolean isLocal = false;//判断是否是本地的图片
 	
 	private ViewPager viewPager;
 	private PicturePagerAdapter pagerAdapter;
@@ -66,6 +68,7 @@ public class PicturesViewPagerActivity extends FragmentActivity {
 	private void initData() {
 		imageList = getIntent().getStringArrayListExtra(EXTRA_IMAGE_LIST);
 		curPosition = getIntent().getIntExtra(EXTRA_CUR_POSITION, 0);
+		isLocal = getIntent().getBooleanExtra(EXTRA_IS_LOCAL, false);
 	}
 
 	private void initView() {
@@ -142,6 +145,7 @@ public class PicturesViewPagerActivity extends FragmentActivity {
 			PicturesViewPagerItemFragment itemFragment = PicturesViewPagerItemFragment.newInstance();
 			Bundle args = new Bundle();
 			args.putString(PicturesViewPagerItemFragment.EXTRA_PICTURE_PATH, imageList.get(position));
+			args.putBoolean(EXTRA_IS_LOCAL, isLocal);
 			itemFragment.setArguments(args);
 			
 			return itemFragment;
