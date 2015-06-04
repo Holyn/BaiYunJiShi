@@ -45,7 +45,7 @@ public class HomeFragment_3 extends BaseFragment{
 	@Override
 	public int getLayoutId() {
 		int height = ScreenUtil.getScreenHeight(getActivity());
-		if (height > 800) {
+		if (height > 1000) {
 			return R.layout.fragment_home_3;
 		}else {
 			return R.layout.fragment_home_3_small;
