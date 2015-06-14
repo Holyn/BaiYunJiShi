@@ -14,8 +14,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.baidu.frontia.api.FrontiaPushMessageReceiver;
+import com.baiyun.activity.webview.WebViewActiviry;
 import com.baiyun.httputils.SlideMenuHttpUtils;
 import com.baiyun.sharepreferences.UserInfoSP;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 /**
  * Push消息处理receiver。请编写您需要的回调函数， 一般来说： onBind是必须的，用来处理startWork返回值；
@@ -99,23 +103,9 @@ public class BaiduPushMessageReceiver extends FrontiaPushMessageReceiver {
                 + "\" customContentString=" + customContentString;
         Log.d(TAG, messageString);
 
-        // 自定义内容获取方式，mykey和myvalue对应透传消息推送时自定义内容中设置的键和值
-        if (!TextUtils.isEmpty(customContentString)) {
-            JSONObject customJson = null;
-            try {
-                customJson = new JSONObject(customContentString);
-                String myvalue = null;
-                if (!customJson.isNull("mykey")) {
-                    myvalue = customJson.getString("mykey");
-                }
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-
         // Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
-        Toast.makeText(context, message+"\n"+customContentString, Toast.LENGTH_LONG).show();
+//        Toast.makeText(context, message+"\n"+customContentString, Toast.LENGTH_LONG).show();
+
     }
 
     /**
@@ -133,6 +123,7 @@ public class BaiduPushMessageReceiver extends FrontiaPushMessageReceiver {
     @Override
     public void onNotificationClicked(Context context, String title,
             String description, String customContentString) {
+    	System.out.println("====> onNotificationClicked....");
         String notifyString = "通知点击 title=\"" + title + "\" description=\""
                 + description + "\" customContent=" + customContentString;
         Log.d(TAG, notifyString);
@@ -142,9 +133,14 @@ public class BaiduPushMessageReceiver extends FrontiaPushMessageReceiver {
             JSONObject customJson = null;
             try {
                 customJson = new JSONObject(customContentString);
-                String myvalue = null;
-                if (!customJson.isNull("mykey")) {
-                    myvalue = customJson.getString("mykey");
+                String contentUrl = null;
+                if (!customJson.isNull("contentUrl")) {
+                	contentUrl = customJson.getString("contentUrl");
+                    Intent intent = new Intent(context.getApplicationContext(), WebViewActiviry.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  
+                    intent.putExtra(WebViewActiviry.KEY_WEB_VIEW_TYPE, WebViewActiviry.BAIDU_PUSH);
+                    intent.putExtra(WebViewActiviry.KEY_CONTENT_URL, contentUrl);
+                    context.getApplicationContext().startActivity(intent);
                 }
             } catch (JSONException e) {
                 // TODO Auto-generated catch block
