@@ -1,5 +1,6 @@
 package com.baiyun.activity.schoolservice;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -54,7 +55,8 @@ public class SLostFoundActivity extends FragmentActivity{
 			
 			@Override
 			public void onClick(View v) {
-				
+				Intent intent = new Intent(SLostFoundActivity.this, SLostPublishActivity.class);
+				startActivity(intent);
 			}
 		});
 		
