@@ -33,6 +33,8 @@ public class WebViewActiviry extends FragmentActivity{
 	public static final int RECRUIT_PLAN = 5;//标题为:招生计划
 	public static final int RECRUIT_INTRO = 6;//标题为:专业介绍
 	
+	public static final int BAIDU_PUSH = 7;//标题为：信息详情
+	
 	private FrameLayout flTopBar = null;
 	private TextView tvTitle = null;
 	private ImageButton ibBack = null, ibTopRight = null;
@@ -70,6 +72,8 @@ public class WebViewActiviry extends FragmentActivity{
 			setTopBarTitle("招生计划");
 		}else if (webViewType == RECRUIT_INTRO) {
 			setTopBarTitle("专业介绍");
+		}else if (webViewType == BAIDU_PUSH) {
+			setTopBarTitle("信息详情");
 		}
 		
 		if (contentUrl == null) {
@@ -77,7 +81,11 @@ public class WebViewActiviry extends FragmentActivity{
 		}else {
 			if (contentUrl.equalsIgnoreCase("")) {
 			}else {
-				contentUrl = HttpURL.HOST+contentUrl;//构造完整Html5路径
+				if (webViewType == BAIDU_PUSH) {
+					contentUrl = HttpURL.HOST+"/"+contentUrl;//构造完整Html5路径
+				}else {
+					contentUrl = HttpURL.HOST+contentUrl;//构造完整Html5路径
+				}
 //				System.out.println("====> WebView-URL: "+contentUrl);
 				
 				
