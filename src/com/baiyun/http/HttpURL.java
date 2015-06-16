@@ -169,6 +169,12 @@ public class HttpURL {
 	public final static String RECRUIT_INFOR_16 = URL_PRE + "recuritInfor?type=16";
 	
 	/**
+	 * 获取网上报名和招生咨询网址接口(add 2015-6-17)
+	 * http://app.byxy.com:8080/app/getOnlineRegisterAndConsultUrl?type=(1为招生咨询，2为网上报名)
+	 */
+	public final static String RECRUIT_GET_RC_URL = URL_PRE + "getOnlineRegisterAndConsultUrl?type=";
+	
+	/**
 	 * 招生服务-网上报名
 	 * http://app.byxy.com:8080/app/recuritInfor?type=23
 	 */
