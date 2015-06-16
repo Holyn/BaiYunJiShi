@@ -57,6 +57,10 @@ public class RecruitHttpUtils  extends HttpUtils{
 		public void onResultCheck(AdmissionResultPar resultPar);
 	}
 	
+	public interface OnGetRCUrlListener{//获取网上报名和招生咨询网址接口
+		public void onGetRCUrl(String Url);
+	}
+	
 	public void getTypeList(final OnGetTypeListListener onGetTypeListListener) {
 		send(HttpMethod.GET, HttpURL.RECRUIT_INFOR_16, new RequestCallBack<String>() {
 
