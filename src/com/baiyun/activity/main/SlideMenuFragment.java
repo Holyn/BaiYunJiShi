@@ -1,5 +1,6 @@
 package com.baiyun.activity.main;
 
+import com.baiyun.activity.MyApplication;
 import com.baiyun.activity.R;
 import com.baiyun.constants.Constants;
 import com.baiyun.custom.CircleImageView;
@@ -89,7 +90,7 @@ public class SlideMenuFragment extends Fragment{
 		filter.addAction(Constants.INTENT_ACTION_LOGIN_SUCCESS);
 		getActivity().registerReceiver(logionReceiver, filter);
 	}
-
+	
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
@@ -104,19 +105,23 @@ public class SlideMenuFragment extends Fragment{
 		
 		//头像
 		cvHeader = (CircleImageView)rootView.findViewById(R.id.cv_header);
-//		String headerPathLast = UserInfoSP.getSingleInstance(getActivity()).getImg();
-//		if (!TextUtils.isEmpty(headerPathLast)) {
-//			String picUrl = HttpURL.HOST+headerPathLast.substring(1);
-//			System.out.println("====> picUrl = "+picUrl);
-//			ImageLoader.getInstance().displayImage(picUrl, cvHeader);
-//		}
 		
 		//名字
-		tvName = (TextView)rootView.findViewById(R.id.tv_name);
-//		String name = UserInfoSP.getSingleInstance(getActivity()).getRealName();
-//		if (!TextUtils.isEmpty(name)) {
-//			tvName.setText(name);
-//		}
+		tvName = (TextView)rootView.findViewById(R.id.tv_name);	
+		if (((MyApplication)getActivity().getApplication()).isLogin()) {
+			//头像
+			String headerPathLast = UserInfoSP.getSingleInstance(getActivity()).getImg();
+			if (!TextUtils.isEmpty(headerPathLast)) {
+				String picUrl = HttpURL.HOST+headerPathLast.substring(1);
+				System.out.println("====> picUrl = "+picUrl);
+				ImageLoader.getInstance().displayImage(picUrl, cvHeader);
+			}
+			//名字
+			String name = UserInfoSP.getSingleInstance(getActivity()).getRealName();
+			if (!TextUtils.isEmpty(name)) {
+				tvName.setText(name);
+			}
+		}
 		
 		LinearLayout llInfo = (LinearLayout)rootView.findViewById(R.id.ll_info);
 		llInfo.setOnClickListener(new View.OnClickListener() {

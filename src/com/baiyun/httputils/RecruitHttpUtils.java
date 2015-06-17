@@ -57,8 +57,8 @@ public class RecruitHttpUtils  extends HttpUtils{
 		public void onResultCheck(AdmissionResultPar resultPar);
 	}
 	
-	public interface OnGetRCUrlListener{//获取网上报名和招生咨询网址接口
-		public void onGetRCUrl(String Url);
+	public interface OnGetRCUrlListener{//获取网上报名和报名查询网址接口
+		public void onGetRCUrl(String url);
 	}
 	
 	public void getTypeList(final OnGetTypeListListener onGetTypeListListener) {
@@ -277,6 +277,47 @@ public class RecruitHttpUtils  extends HttpUtils{
 			@Override
 			public void onFailure(HttpException error, String msg) {
 				onResultCheckListener.onResultCheck(null);
+				Toast.makeText(context, "数据请求失败", Toast.LENGTH_SHORT).show();
+			}
+			
+		});
+	}
+	
+	public void getRCUrl(String type, final OnGetRCUrlListener onGetRCUrlListener){
+		String url = HttpURL.RECRUIT_GET_RC_URL+type;
+		send(HttpMethod.GET, url, new RequestCallBack<String>() {
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				String url = null;
+				try {
+					JsonParser parser = new JsonParser();
+					JsonObject jsonObject = parser.parse(responseInfo.result).getAsJsonObject();
+
+					JsonElement recodeEle = jsonObject.get("recode");
+					if (recodeEle.isJsonPrimitive()) {
+						String recode = recodeEle.getAsString();
+						if (recode.equalsIgnoreCase(HttpRecode.GET_SUCCESS)) {
+							JsonElement dataEle = jsonObject.get("data");
+							if (dataEle.isJsonObject()) {
+								JsonObject dataObj = dataEle.getAsJsonObject();
+								JsonElement urlEle = dataObj.get("url");
+								if (urlEle.isJsonPrimitive()) {
+									url = urlEle.getAsString();
+								}
+							}
+						}
+					}
+				} catch (Exception e) {
+					url = null;
+					System.out.println(e);
+				}
+				onGetRCUrlListener.onGetRCUrl(url);
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				onGetRCUrlListener.onGetRCUrl(null);
 				Toast.makeText(context, "数据请求失败", Toast.LENGTH_SHORT).show();
 			}
 			

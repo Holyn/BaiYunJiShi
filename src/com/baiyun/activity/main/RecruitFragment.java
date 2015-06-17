@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.baiyun.activity.MyApplication;
 import com.baiyun.activity.R;
 import com.baiyun.activity.recruit.ApplyFragment;
+import com.baiyun.activity.recruit.ApplyFragment2;
 import com.baiyun.activity.recruit.RSearchActivity;
 import com.baiyun.activity.recruit.RecruitTypeFragment;
 import com.baiyun.activity.recruit.EnterFragment;
@@ -42,7 +43,8 @@ public class RecruitFragment extends BaseFragment{
 	private EnterFragment enterFragment = null;
 //	private RecruitTypeFragment consultFragment = null;
 	private RecruitTypeFragment2 consultFragment2 = null;
-	private ApplyFragment applyFragment = null;
+//	private ApplyFragment applyFragment = null;
+	private ApplyFragment2 applyFragment2 = null;
 	
 	public static RecruitFragment newInstance() {
 		return new RecruitFragment();
@@ -97,8 +99,8 @@ public class RecruitFragment extends BaseFragment{
 			rb_2.setChecked(false);
 			rb_3.setChecked(false);
 			rb_4.setChecked(true);
-			applyFragment = ApplyFragment.newInstance();
-			curFragment = applyFragment;
+			applyFragment2 = ApplyFragment2.newInstance();
+			curFragment = applyFragment2;
 		}
 		fragmentManager.beginTransaction().add(R.id.fl_container, curFragment).commit();
 	}
@@ -179,7 +181,7 @@ public class RecruitFragment extends BaseFragment{
 					rb_3.setChecked(false);
 					rb_4.setChecked(false);
 					
-					btnSearch.setVisibility(View.GONE);
+//					btnSearch.setVisibility(View.GONE);
 					
 					tv_1.setTextColor(getActivity().getResources().getColor(R.color.actionbar_bg));
 					tv_item_title.setText("减免学费申请指南");
@@ -202,7 +204,7 @@ public class RecruitFragment extends BaseFragment{
 					rb_3.setChecked(false);
 					rb_4.setChecked(false);
 					
-					btnSearch.setVisibility(View.GONE);
+//					btnSearch.setVisibility(View.GONE);
 					
 					tv_2.setTextColor(getActivity().getResources().getColor(R.color.actionbar_bg));
 					tv_item_title.setText("新生入学须知");
@@ -224,7 +226,7 @@ public class RecruitFragment extends BaseFragment{
 					rb_3.setChecked(true);
 					rb_4.setChecked(false);
 					
-					btnSearch.setVisibility(View.GONE);
+//					btnSearch.setVisibility(View.GONE);
 					
 					tv_3.setTextColor(getActivity().getResources().getColor(R.color.actionbar_bg));
 					tv_item_title.setText("招生层次");
@@ -246,7 +248,7 @@ public class RecruitFragment extends BaseFragment{
 					rb_3.setChecked(false);
 					rb_4.setChecked(true);
 					
-					btnSearch.setVisibility(View.VISIBLE);
+//					btnSearch.setVisibility(View.VISIBLE);
 					
 					tv_4.setTextColor(getActivity().getResources().getColor(R.color.actionbar_bg));
 					tv_item_title.setText("网上报名");
@@ -278,10 +280,10 @@ public class RecruitFragment extends BaseFragment{
 			}
 			nextFragment = consultFragment2;
 		}else if (position == 3) {
-			if (applyFragment == null) {
-				applyFragment = ApplyFragment.newInstance();
+			if (applyFragment2 == null) {
+				applyFragment2 = ApplyFragment2.newInstance();
 			}
-			nextFragment = applyFragment;
+			nextFragment = applyFragment2;
 		}
 		
 		if (curPosition != position) {
@@ -295,9 +297,9 @@ public class RecruitFragment extends BaseFragment{
 			/**
 			 * remove了对应的Fragment之后，那么下次切换到这个Fragment就会重新OnResum，不可见是OnPause
 			 */
-			if (curFragment == applyFragment) {
+			if (curFragment == applyFragment2) {
 				fragmentManager.beginTransaction().remove(curFragment).commit();
-				applyFragment = null;
+				applyFragment2 = null;
 			}
 			
 			curPosition = position;
