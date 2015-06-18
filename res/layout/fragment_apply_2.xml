@@ -11,7 +11,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/selector_btn_submit"
-        android:text="点击报名"
+        android:text="白云工商技师报名"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_18" />
     
@@ -21,7 +21,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/selector_btn_submit"
-        android:text="点击查询"
+        android:text="职业技能培训报名"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_18" />
 </LinearLayout>
