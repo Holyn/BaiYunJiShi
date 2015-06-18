@@ -149,7 +149,7 @@ public class BaiduPushMessageReceiver extends FrontiaPushMessageReceiver {
         }
 
         // Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
-        Toast.makeText(context, title+"\n"+description+"\n"+customContentString, Toast.LENGTH_LONG).show();
+//        Toast.makeText(context, title+"\n"+description+"\n"+customContentString, Toast.LENGTH_LONG).show();
     }
 
     /**
