@@ -35,8 +35,10 @@ public class WebViewActiviry extends FragmentActivity{
 	
 	public static final int BAIDU_PUSH = 7;//标题为：信息详情
 	
-	public static final int R_Consult = 8;//标题为：招生咨询
+	public static final int R_Consult = 8;//标题为：报名查询
 	public static final int R_Register = 9;//标题为：网上报名
+	
+	public static final int H_Consult = 10;//标题为：招生咨询
 	
 	private FrameLayout flTopBar = null;
 	private TextView tvTitle = null;
@@ -81,6 +83,8 @@ public class WebViewActiviry extends FragmentActivity{
 			setTopBarTitle("报名查询");
 		}else if (webViewType == R_Register) {
 			setTopBarTitle("网上报名");
+		}else if (webViewType == H_Consult) {
+			setTopBarTitle("招生咨询");
 		}
 		
 		if (contentUrl == null) {
@@ -90,7 +94,7 @@ public class WebViewActiviry extends FragmentActivity{
 			}else {
 				if (webViewType == BAIDU_PUSH) {
 					contentUrl = HttpURL.HOST+"/"+contentUrl;//构造完整Html5路径
-				}else if (webViewType == R_Consult || webViewType == R_Register) {
+				}else if (webViewType == R_Consult || webViewType == R_Register || webViewType == H_Consult) {
 					
 				}else {
 					contentUrl = HttpURL.HOST+contentUrl;//构造完整Html5路径
