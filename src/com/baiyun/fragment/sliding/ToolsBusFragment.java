@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,7 +129,9 @@ public class ToolsBusFragment extends BaseFragment{
 			
 			Vo1Par vo1 = list.get(position);
 			holder.tvTitle.setText(vo1.getTitle());
-			holder.tvBrief.setText(vo1.getBrief());
+//			holder.tvBrief.setText(vo1.getBrief());
+			
+			holder.tvBrief.setText(Html.fromHtml(vo1.getBrief()));
 			
 			return convertView;
 		}
