@@ -21,7 +21,9 @@ import com.baiyun.activity.recruit.EnterFragment;
 import com.baiyun.activity.recruit.RecruitTypeFragment2;
 import com.baiyun.activity.recruit.TuitionFragment;
 import com.baiyun.activity.recruit.TuitionFragment2;
+import com.baiyun.activity.webview.WebViewActiviry;
 import com.baiyun.base.BaseFragment;
+import com.baiyun.httputils.RecruitHttpUtils;
 import com.baiyun.kefu.KeFuManager;
 
 public class RecruitFragment extends BaseFragment{
@@ -153,7 +155,23 @@ public class RecruitFragment extends BaseFragment{
 			
 			@Override
 			public void onClick(View v) {
-				new KeFuManager(getActivity()).startChat();
+//				new KeFuManager(getActivity()).startChat();
+				
+				showLoadingDialog();
+				(new RecruitHttpUtils(getActivity())).getRCUrl("3", new RecruitHttpUtils.OnGetRCUrlListener() {
+					
+					@Override
+					public void onGetRCUrl(String url) {
+						// TODO Auto-generated method stub
+						closeLoadingDialog();
+						if (url != null) {
+							Intent intent = new Intent(getActivity(), WebViewActiviry.class);
+							intent.putExtra(WebViewActiviry.KEY_WEB_VIEW_TYPE, WebViewActiviry.H_Consult);
+							intent.putExtra(WebViewActiviry.KEY_CONTENT_URL, url);
+							getActivity().startActivity(intent);
+						}
+					}
+				});
 			}
 		});
 		

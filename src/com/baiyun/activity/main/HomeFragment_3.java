@@ -17,8 +17,10 @@ import com.baiyun.activity.home.NewsActivity;
 import com.baiyun.activity.home.OverviewActivity;
 import com.baiyun.activity.home.TrafficActivity;
 import com.baiyun.activity.home.VideoActivity;
+import com.baiyun.activity.webview.WebViewActiviry;
 import com.baiyun.base.BaseFragment;
 import com.baiyun.httputils.HomeHttpUtils;
+import com.baiyun.httputils.RecruitHttpUtils;
 import com.baiyun.kefu.KeFuManager;
 import com.baiyun.util.ScreenUtil;
 
@@ -105,7 +107,23 @@ public class HomeFragment_3 extends BaseFragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				new KeFuManager(getActivity()).startChat();
+//				new KeFuManager(getActivity()).startChat();
+				
+				showLoadingDialog();
+				(new RecruitHttpUtils(getActivity())).getRCUrl("3", new RecruitHttpUtils.OnGetRCUrlListener() {
+					
+					@Override
+					public void onGetRCUrl(String url) {
+						// TODO Auto-generated method stub
+						closeLoadingDialog();
+						if (url != null) {
+							Intent intent = new Intent(getActivity(), WebViewActiviry.class);
+							intent.putExtra(WebViewActiviry.KEY_WEB_VIEW_TYPE, WebViewActiviry.H_Consult);
+							intent.putExtra(WebViewActiviry.KEY_CONTENT_URL, url);
+							getActivity().startActivity(intent);
+						}
+					}
+				});
 			}
 		});
 		((ImageView)rootView.findViewById(R.id.iv_online)).setOnClickListener(new View.OnClickListener() {
