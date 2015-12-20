@@ -144,7 +144,7 @@ public class MainActivity extends BaseSlidingFragmentActivity {
     }
     
 	public void switchFragment(int position) {
-		System.out.println("cur="+curPosition+" pos="+position);
+//		System.out.println("cur="+curPosition+" pos="+position);
 		
 		if (position != 0) {//如果非首页，则显示回退按钮
 			setBackPressEnabled(true);
