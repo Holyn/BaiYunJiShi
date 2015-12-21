@@ -46,12 +46,13 @@ public class HomeFragment_3 extends BaseFragment{
 	
 	@Override
 	public int getLayoutId() {
-		int height = ScreenUtil.getScreenHeight(getActivity());
-		if (height > 1000) {
-			return R.layout.fragment_home_3;
-		}else {
-			return R.layout.fragment_home_3_small;
-		}
+//		int height = ScreenUtil.getScreenHeight(getActivity());
+//		if (height > 1000) {
+//			return R.layout.fragment_home_4;
+//		}else {
+//			return R.layout.fragment_home_3_small;
+//		}
+		return R.layout.fragment_home_4;
 	}
 
 	@Override

@@ -1,0 +1,123 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:src="@drawable/home_bg_4" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="none" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/iv_center"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/home_logo_4"
+                android:contentDescription="@string/app_name" />
+            <View 
+                android:id="@+id/v_center_point"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="200dp"
+                android:layout_centerHorizontal="true"/>
+
+            <ImageView
+                android:id="@+id/iv_setting"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="38dp"
+                android:layout_toLeftOf="@+id/v_center_point"
+                android:background="@drawable/home_sys_setting_4"
+                android:contentDescription="@string/app_name" />
+
+            <ImageView
+                android:id="@+id/iv_consult"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="48dp"
+                android:layout_toRightOf="@+id/v_center_point"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/home_consult_4" />
+
+            <ImageView
+                android:id="@+id/iv_job"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_below="@+id/iv_consult"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/v_center_point"
+                android:background="@drawable/home_job_4"
+                android:contentDescription="@string/app_name" />
+
+            <ImageView
+                android:id="@+id/iv_video"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_below="@+id/iv_online"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="68dp"
+                android:layout_toLeftOf="@+id/v_center_point"
+                android:background="@drawable/home_video_4"
+                android:contentDescription="@string/app_name" />
+
+            <ImageView
+                android:id="@+id/iv_online"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_below="@+id/iv_summary"
+                android:layout_marginTop="14dp"
+                android:layout_marginRight="90dp"
+                android:layout_toLeftOf="@+id/v_center_point"
+                android:background="@drawable/home_online_4"
+                android:contentDescription="@string/app_name" />
+
+            <ImageView
+                android:id="@+id/iv_summary"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="84dp"
+                android:layout_marginRight="68dp"
+                android:layout_toLeftOf="@+id/v_center_point"
+                android:background="@drawable/home_school_summary_4"
+                android:contentDescription="@string/app_name" />
+
+            <ImageView
+                android:id="@+id/iv_traffic"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="290dp"
+                android:layout_alignLeft="@+id/v_center_point"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/home_traffic_4"
+                android:contentDescription="@string/app_name" />
+
+            <ImageView
+                android:id="@+id/iv_reports"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="294dp"
+                android:layout_toLeftOf="@+id/v_center_point"
+                android:background="@drawable/home_school_reports_4"
+                android:contentDescription="@string/app_name" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

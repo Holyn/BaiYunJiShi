@@ -15,6 +15,7 @@ import com.baiyun.base.BaseSlidingFragmentActivity;
 public class ContainerFragment extends BaseFragment{
 	private ImageView line_1,line_2,line_3,line_4;
 	private RadioButton rb_1,rb_2,rb_3,rb_4;
+	private ImageView rb_tv_bg_1,rb_tv_bg_2,rb_tv_bg_3,rb_tv_bg_4;
 	
 	private FragmentManager fragmentManager;
 	private Fragment curFragment;
@@ -37,7 +38,7 @@ public class ContainerFragment extends BaseFragment{
 	@Override
 	public int getLayoutId() {
 		// TODO Auto-generated method stub
-		return R.layout.fragment_main_container;
+		return R.layout.fragment_main_container_2;
 	}
 
 	@Override
@@ -53,6 +54,11 @@ public class ContainerFragment extends BaseFragment{
 		rb_2 = (RadioButton)rootView.findViewById(R.id.rb_tab_recruit);
 		rb_3 = (RadioButton)rootView.findViewById(R.id.rb_tab_life);
 		rb_4 = (RadioButton)rootView.findViewById(R.id.rb_tab_service);
+		
+		rb_tv_bg_1 = (ImageView)rootView.findViewById(R.id.rb_tab_textview_bg_1);
+		rb_tv_bg_2 = (ImageView)rootView.findViewById(R.id.rb_tab_textview_bg_2);
+		rb_tv_bg_3 = (ImageView)rootView.findViewById(R.id.rb_tab_textview_bg_3);
+		rb_tv_bg_4 = (ImageView)rootView.findViewById(R.id.rb_tab_textview_bg_4);
 		
 		homeFragment_3 = HomeFragment_3.newInstance();
 		curFragment = homeFragment_3;
@@ -80,15 +86,20 @@ public class ContainerFragment extends BaseFragment{
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
 					((MainActivity)getActivity()).setTopBarTitle("广州市白云工商技师学院");
-					line_1.setVisibility(View.VISIBLE);
-					line_2.setVisibility(View.GONE);
-					line_3.setVisibility(View.GONE);
-					line_4.setVisibility(View.GONE);
+					line_1.setBackgroundResource(R.color.green);
+					line_2.setBackgroundResource(R.color.tab_bottom_text);
+					line_3.setBackgroundResource(R.color.tab_bottom_text);
+					line_4.setBackgroundResource(R.color.tab_bottom_text);
 					
 					rb_1.setChecked(true);
 					rb_2.setChecked(false);
 					rb_3.setChecked(false);
 					rb_4.setChecked(false);
+					
+					rb_tv_bg_1.setBackgroundResource(R.color.tab_bottom_text);
+					rb_tv_bg_2.setBackgroundResource(R.color.black);
+					rb_tv_bg_3.setBackgroundResource(R.color.black);
+					rb_tv_bg_4.setBackgroundResource(R.color.black);
 					switchFragment(0);
 				}
 			}
@@ -100,15 +111,20 @@ public class ContainerFragment extends BaseFragment{
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
 					((MainActivity)getActivity()).setTopBarTitle("招生服务");
-					line_1.setVisibility(View.GONE);
-					line_2.setVisibility(View.VISIBLE);
-					line_3.setVisibility(View.GONE);
-					line_4.setVisibility(View.GONE);
+					line_1.setBackgroundResource(R.color.tab_bottom_text);
+					line_2.setBackgroundResource(R.color.green);
+					line_3.setBackgroundResource(R.color.tab_bottom_text);
+					line_4.setBackgroundResource(R.color.tab_bottom_text);
 					
 					rb_1.setChecked(false);
 					rb_2.setChecked(true);
 					rb_3.setChecked(false);
 					rb_4.setChecked(false);
+					
+					rb_tv_bg_1.setBackgroundResource(R.color.black);
+					rb_tv_bg_2.setBackgroundResource(R.color.tab_bottom_text);
+					rb_tv_bg_3.setBackgroundResource(R.color.black);
+					rb_tv_bg_4.setBackgroundResource(R.color.black);
 					switchFragment(1);
 				}
 			}
@@ -121,15 +137,20 @@ public class ContainerFragment extends BaseFragment{
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
 					((MainActivity)getActivity()).setTopBarTitle("校园生活");
-					line_1.setVisibility(View.GONE);
-					line_2.setVisibility(View.GONE);
-					line_3.setVisibility(View.VISIBLE);
-					line_4.setVisibility(View.GONE);
+					line_1.setBackgroundResource(R.color.tab_bottom_text);
+					line_2.setBackgroundResource(R.color.tab_bottom_text);
+					line_3.setBackgroundResource(R.color.green);
+					line_4.setBackgroundResource(R.color.tab_bottom_text);
 					
 					rb_1.setChecked(false);
 					rb_2.setChecked(false);
 					rb_3.setChecked(true);
 					rb_4.setChecked(false);
+					
+					rb_tv_bg_1.setBackgroundResource(R.color.black);
+					rb_tv_bg_2.setBackgroundResource(R.color.black);
+					rb_tv_bg_3.setBackgroundResource(R.color.tab_bottom_text);
+					rb_tv_bg_4.setBackgroundResource(R.color.black);
 					switchFragment(2);
 				}
 			}
@@ -142,15 +163,20 @@ public class ContainerFragment extends BaseFragment{
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
 					((MainActivity)getActivity()).setTopBarTitle("校内服务");
-					line_1.setVisibility(View.GONE);
-					line_2.setVisibility(View.GONE);
-					line_3.setVisibility(View.GONE);
-					line_4.setVisibility(View.VISIBLE);
+					line_1.setBackgroundResource(R.color.tab_bottom_text);
+					line_2.setBackgroundResource(R.color.tab_bottom_text);
+					line_3.setBackgroundResource(R.color.tab_bottom_text);
+					line_4.setBackgroundResource(R.color.green);
 					
 					rb_1.setChecked(false);
 					rb_2.setChecked(false);
 					rb_3.setChecked(false);
 					rb_4.setChecked(true);
+					
+					rb_tv_bg_1.setBackgroundResource(R.color.black);
+					rb_tv_bg_2.setBackgroundResource(R.color.black);
+					rb_tv_bg_3.setBackgroundResource(R.color.black);
+					rb_tv_bg_4.setBackgroundResource(R.color.tab_bottom_text);
 					switchFragment(3);
 				}
 			}
