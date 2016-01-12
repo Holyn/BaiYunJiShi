@@ -23,7 +23,8 @@ public class ContainerFragment extends BaseFragment{
 	private int curPosition = -1;
 //	private HomeFragment homeFragment = null;
 //	private HomeFragment_2 homeFragment_2 = null;
-	private HomeFragment_3 homeFragment_3 = null;
+//	private HomeFragment_3 homeFragment_3 = null;
+	private HomeFragment_5 homeFragment_5 = null;
 	private RecruitFragment recruitFragment = null;
 	private SchoolLifeFragment schoolLifeFragment = null;
 	private SchoolServiceFragment schoolServiceFragment = null;
@@ -60,8 +61,8 @@ public class ContainerFragment extends BaseFragment{
 		rb_tv_bg_3 = (ImageView)rootView.findViewById(R.id.rb_tab_textview_bg_3);
 		rb_tv_bg_4 = (ImageView)rootView.findViewById(R.id.rb_tab_textview_bg_4);
 		
-		homeFragment_3 = HomeFragment_3.newInstance();
-		curFragment = homeFragment_3;
+		homeFragment_5 = HomeFragment_5.newInstance();
+		curFragment = homeFragment_5;
 		fragmentManager.beginTransaction().add(R.id.fl_container, curFragment).commit();
 		
 		initRadioButtonListener();//设置监听底部的RadioButton
@@ -186,10 +187,10 @@ public class ContainerFragment extends BaseFragment{
 	public void switchFragment(int position) {
 		Fragment nextFragment = null;
 		if (position == 0) {
-			if (homeFragment_3 == null) {
-				homeFragment_3 = HomeFragment_3.newInstance();
+			if (homeFragment_5 == null) {
+				homeFragment_5 = HomeFragment_5.newInstance();
 			}
-			nextFragment = homeFragment_3;
+			nextFragment = homeFragment_5;
 		}else if (position == 1) {
 			if (recruitFragment == null) {
 				recruitFragment = RecruitFragment.newInstance();
